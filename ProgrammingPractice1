@@ -12,7 +12,6 @@ If so, explain what.>
 <Reflection 4 Think about the most important thing you learned when writing this
 piece of code.  What was it and explain why it was significant.>
 */
-
 int findLargestPower(int numChange, int numBase, int exp) {
 	if ((pow(numBase, exp) / numChange) > numBase) {
 	exp = exp + 1;
@@ -26,12 +25,12 @@ int findLargestPower(int numChange, int numBase, int exp) {
 }
 */
 int main(void) {
-	int numChange, numBase;
+	int numChange, numBase, a;
 	int exp = 0;
 	scanf("Enter number in base 10: %d\n", &numChange);
 	scanf("Enter base number to chnage to: %d\n", &numBase);
 	
-	findFirstPower(numChange, numBase, exp);
+	a = findLargestPower(numChange, numBase, exp);
 	
 	
 	
