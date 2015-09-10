@@ -1,0 +1,38 @@
+#include <stdio.h>
+/* Nicholas Losby
+nlosby@iastate.edu (Should be your isu email)
+CPRE 185 Section A  (change to your class and section)
+Programming Practice 1
+
+<Reflection 1 What were you trying to learn or achieve?>
+<Reflection 2 Were you successful? Why or Why not?>
+<Reflection 3 Would you do anything differently if starting this program over?
+If so, explain what.>
+<Reflection 4 Think about the most important thing you learned when writing this
+piece of code.  What was it and explain why it was significant.>
+*/
+
+int findLargestPower(int numChange, int numBase) {
+	int x = 0;
+	if ((pow(numBase, x) / numChange) > numBase) {
+	x = x + 1;
+	findLargestPower();
+	}
+	return x;
+}
+
+int divideForFirstPlace {
+	
+}
+
+int main(void) {
+	int numChange, numBase
+	scanf("Enter number in base 10: ", &numChange);
+	scanf("Enter base number to chnage to: ", &numBase);
+	
+	findFirstPower(numChange, numBase);
+	
+	
+	
+	return 0;
+}
