@@ -13,25 +13,25 @@ If so, explain what.>
 piece of code.  What was it and explain why it was significant.>
 */
 
-int findLargestPower(int numChange, int numBase) {
-	int x = 0;
-	if ((pow(numBase, x) / numChange) > numBase) {
-	x = x + 1;
-	findLargestPower();
+int findLargestPower(int numChange, int numBase, int exp) {
+	if ((pow(numBase, exp) / numChange) > numBase) {
+	exp = exp + 1;
+	findLargestPower(numChange, numBase, exp);
 	}
-	return x;
+	return exp;
 }
 
-int divideForFirstPlace(){
+/*int divideForFirstPlace(){
 	
 }
-
+*/
 int main(void) {
-	int numChange, numBase
-	scanf("Enter number in base 10: ", &numChange);
-	scanf("Enter base number to chnage to: ", &numBase);
+	int numChange, numBase;
+	int exp = 0;
+	scanf("Enter number in base 10: %d\n", &numChange);
+	scanf("Enter base number to chnage to: %d\n", &numBase);
 	
-	findFirstPower(numChange, numBase);
+	findFirstPower(numChange, numBase, exp);
 	
 	
 	
