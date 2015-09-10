@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 /* Nicholas Losby
 nlosby@iastate.edu (Should be your isu email)
 CPRE 185 Section A  (change to your class and section)
@@ -21,7 +22,7 @@ int findLargestPower(int numChange, int numBase) {
 	return x;
 }
 
-int divideForFirstPlace {
+int divideForFirstPlace(){
 	
 }
 
