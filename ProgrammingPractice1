@@ -25,8 +25,11 @@ piece of code.  What was it and explain why it was significant.>
 	
 }
 */
+#include <stdio.h>
+#include <math.h>
+
 int main(void) {
-	int numChange, numBase, a;
+	int numChange, numBase, largestPower, a;
 	int exp = 0;
 	printf("Enter number in base 10: ");
 	scanf("%d,%d", &numChange, &numBase);
@@ -34,7 +37,12 @@ int main(void) {
 	
 	for (exp = 0; ((numChange / (pow(numBase, exp))) >= numBase); exp = exp + 1 )
 	{
-		printf("%d", exp);
+		a = pow(numBase, exp);
 		}
+	for (exp = largestPower; (numChange % (a) > 0); exp = exp - 1)
+	{
+		printf("%d", (numChange / pow(numBase, exp)));
+	}
 	
 	return 0;
+}
