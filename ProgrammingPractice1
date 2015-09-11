@@ -28,13 +28,13 @@ piece of code.  What was it and explain why it was significant.>
 int main(void) {
 	int numChange, numBase, a;
 	int exp = 0;
-	scanf("Enter number in base 10: %d, %d", &numChange, &numBase);
+	printf("Enter number in base 10: ");
+	scanf("%d,%d", &numChange, &numBase);
 	//scanf("Enter base number to chnage to: %d\n", &numBase);
 	
-	for (exp = 0; ((numChange / (pow(numBase, exp))) > numBase); exp = exp + 1 )
+	for (exp = 0; ((numChange / (pow(numBase, exp))) >= numBase); exp = exp + 1 )
 	{
 		printf("%d", exp);
 		}
 	
 	return 0;
-}
