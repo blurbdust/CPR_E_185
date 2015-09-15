@@ -29,20 +29,28 @@ piece of code.  What was it and explain why it was significant.>
 #include <math.h>
 
 int main(void) {
-	int numChange, numBase, largestPower, a;
+	int numChange, numBase, largestPower, a, b;
 	int exp = 0;
-	printf("Enter number in base 10: ");
+	printf("Enter number in base 10: \n");
 	scanf("%d,%d", &numChange, &numBase);
 	//scanf("Enter base number to chnage to: %d\n", &numBase);
 	
 	for (exp = 0; ((numChange / (pow(numBase, exp))) >= numBase); exp = exp + 1 )
 	{
 		a = pow(numBase, exp);
+		largestPower = exp;
+	//	printf("%d", exp);
 		}
-	for (exp = largestPower; (numChange % (a) > 0); exp = exp - 1)
+	for (exp; (numChange % (a) >= 0); exp = exp - 1)
 	{
-		printf("%d", (numChange / pow(numBase, exp)));
-	}
-	
+		if (exp == 0) {
+			return 0;
+		} else 
+		a = pow(numBase, exp);
+		b = (numChange / pow(numBase, exp));
+		printf("%d", b);
+		numChange = (numChange % a);
+		}
+		
 	return 0;
 }
