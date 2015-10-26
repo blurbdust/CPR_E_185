@@ -141,7 +141,7 @@ int PromptForPlayAI(char board[3][3], char* turn) {
 		*turn = 'o';
 		AI(board, turn);
 	}
-	else if (*turn = 'o') {
+	else if (*turn == 'o') {
 		AI(board, turn);
 		*turn = 'x';
 	}
@@ -154,53 +154,53 @@ void AI(char board[3][3], char* turn) {
 	int i;
 	for (i=1;i<=9;i++) {
 		printf("%d %c",i, *turn);
-		if ((i==1) && (board[0][0] = '_') && (*turn == 'o')) {
+		if ((i==1) && (board[0][0] == '_') && (*turn == 'o')) {
 				board[0][0] = 'o';
 				*turn = 'x';
 				//return 0;
 				}
-		else if ((i==2) && (board[0][2] = '_') && (*turn == 'o')) {
+		else if ((i==2) && (board[0][2] == '_') && (*turn == 'o')) {
 				board[0][2] = 'o';
 				*turn = 'x';
 				//return 0;
 				}
-		else if ((i==3) && (board[2][0] = '_') && (*turn == 'o')) {
+		else if ((i==3) && (board[2][0] == '_') && (*turn == 'o')) {
 				board[2][0] = 'o';
 				*turn = 'x';
 				//return 0;
 				}
-		else if ((i==4) && (board[1][1] = '_') && (*turn == 'o')) {
+		else if ((i==4) && (board[1][1] == '_') && (*turn == 'o')) {
 				board[1][1] = 'o';
 				*turn = 'x';
 				//return 0;
 				}
-		else if ((i==5) && (board[1][0] = '_') && (*turn == 'o')) {
+		else if ((i==5) && (board[1][0] == '_') && (*turn == 'o')) {
 				board[1][0] = 'o';
 				*turn = 'x';
 				//return 0;				
 				}
-		else if ((i==6) && (board[0][1] = '_') && (*turn == 'o')) {
+		else if ((i==6) && (board[0][1] == '_') && (*turn == 'o')) {
 				board[0][1] = 'o';
 				*turn = 'x';
 				//return 0;
 				}
-		else if ((i==7) && (board[1][2] = '_') && (*turn == 'o')) {
+		else if ((i==7) && (board[1][2] == '_') && (*turn == 'o')) {
 				board[1][2] = 'o';
 				*turn = 'x';
 				//return 0;
 				}
-		else if ((i==8) && (board[2][1] = '_') && (*turn == 'o')) {
+		else if ((i==8) && (board[2][1] == '_') && (*turn == 'o')) {
 				board[2][1] = 'o';
 				*turn = 'x';
 				//return 0;
 				}
-		else if ((i==9) && (board[2][2] = '_') && (*turn == 'o')) {
+		else if ((i==9) && (board[2][2] == '_') && (*turn == 'o')) {
 				board[2][2] = 'o';
 				*turn = 'x';
 				//return 0;
 				}
 		else {
-			return 0;
+			printf("No moves?");
 			}
 		printf("%d",i);
 	}
