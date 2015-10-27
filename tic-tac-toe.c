@@ -1,17 +1,3 @@
-/*         Nicholas Losby
-        nlosby@iastate.edu
-        CPRE 185 Section B
-Programming Practice 5
-         <Reflection 1 What were you trying to learn or achieve?>
-                2-D Arrays
-        <Reflection 2 Were you successful? Why or Why not?>
-        Yeah, I belive so. The program works.
-<Reflection 3 Would you do anything differently if starting this program over?  If so, explain what.>
-        Not really. If anything I want to make an AI for it but I don't see that happening anytime soon.
-<Reflection 4 Think about the most important thing you learned when writing this piece of code.  What was it and explain why it was significant.>
-        More use with pointers meaning less headaches in the future.
-*/
-
 #include <stdio.h>
 
 void MakeGameBoard(char board[3][3]);
