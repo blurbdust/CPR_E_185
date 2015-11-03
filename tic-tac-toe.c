@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <time.h>
+#include <math.h>
 
 void MakeGameBoard(char board[3][3]);
 
@@ -7,8 +9,9 @@ void PrintBoard(char board[3][3]);
 int PromptForPlay(char board[3][3], char* turn, int* count);
 int PromptForPlayAI(char board[3][3], char* turn, int* count, int* winner);
 void AI(char board[3][3], char* turn, int* count, int* winner);
-int CheckLegal(int x, int y);
-
+int CheckLegal(int x, int y, char board[3][3]);
+int AIS(char board[3][3]);
+void AboutPage();
 
 
 void main (){
@@ -19,7 +22,7 @@ void main (){
 	int mode = 0;
 	int count = 0;
 	
-	printf("Enter a gamemode:\n1: Two Player\n2: Against AI [BETA]\n");
+	printf("Enter a gamemode:\n1: Two Player\n2: Against AI [BETA]\n3: About Page\n");
 	scanf("%d", &mode);
 	
 	if (mode == 1) {
@@ -39,8 +42,10 @@ void main (){
 			PrintBoard(board);
 			winner = CheckForWinner(board, &count);
 			}
-	
-}
+	}
+	else if (mode == 3) {
+		AboutPage();
+	}
 }
 
 void MakeGameBoard(char board[3][3]) {
@@ -86,7 +91,7 @@ int CheckForWinner(char board[3][3], int* count) {
 	//Check Cats Game
 	for (x=0;x<3;x++) {
 		for (y=0;y<3;y++) {
-			if ((board[x][y] != '_') && ((winner != 1) || (winner != 2)) && (*count >= 9)) {
+			if ((board[x][y] != '_') && (*count >= 9) && ((winner != 1) || (winner != 2))) {
 				winner = 3;
 			}
 		}
@@ -132,7 +137,7 @@ int PromptForPlay(char board[3][3], char* turn, int* count) {
 	int x,y;
 	printf("%c, Enter coordinates where you wish to play:\n", *turn);
 	scanf("%d,%d", &x, &y);
-	if ((CheckLegal(x,y) == 1)) {
+	if ((CheckLegal(x,y, board) == 1)) {
 		if (*turn == 'o') {
 			board[x][y] = 'o';
 			*turn = 'x';
@@ -155,37 +160,87 @@ int PromptForPlayAI(char board[3][3], char* turn, int* count, int* winner) {
 		if (*turn == 'x') {
 			printf("Enter coordinates where you wish to play:\n");
 			scanf("%d,%d", &x, &y);
-			if ((CheckLegal(x,y) == 1)) {
+			if ((CheckLegal(x,y, board) == 1)) {
 				board[x][y] = 'x';
 				*turn = 'o';
+				*winner = CheckForWinner(board, count);
 				AI(board, turn, count, winner);
 				++*count;
 			}
 			else {
-				printf("Error\n");
-				//PromptForPlay(board, turn);
+				printf("Error.\n");
 				}
 		}
 		else if (*turn == 'o') {
+			*winner = CheckForWinner(board, count);
 			AI(board, turn, count, winner);
 			*turn = 'x';
 			++*count;
 			}
-		/*else {
-			printf("I suck.");
-		} */
 	
 	}
 void AI(char board[3][3], char* turn, int* count, int* winner) {
 	int i;
-	int o = 0;
-	if ((*turn == 'o') && (o<=1)) {
-	for (i=1;i<=9;i++) {
-		printf("%d %c",i, *turn);
-		/*if (((board[1][2] == '_') && (board[2][1] == '_')) || ((board[2][1] == '_') && (board[1][2] == '_'))) {
-			board[1][2] = 'o';
-			*turn = 'x';
-		} */
+		i = AIS(board);
+		i = abs(i);
+		if ((i==1) && (board[0][0] == '_') && (*turn == 'o')) {
+				board[0][0] = 'o';
+				*turn = 'x';
+				}
+		else if ((i==2) && (board[0][2] == '_') && (*turn == 'o')) {
+				board[0][2] = 'o';
+				*turn = 'x';
+				}
+		else if ((i==3) && (board[2][0] == '_') && (*turn == 'o')) {
+				board[2][0] = 'o';
+				*turn = 'x';
+				}
+		else if ((i==4) && (board[1][1] == '_') && (*turn == 'o')) {
+				board[1][1] = 'o';
+				*turn = 'x';
+				}
+		else if ((i==5) && (board[1][0] == '_') && (*turn == 'o')) {
+				board[1][0] = 'o';
+				*turn = 'x';			
+				}
+		else if ((i==6) && (board[0][1] == '_') && (*turn == 'o')) {
+				board[0][1] = 'o';
+				*turn = 'x';
+				}
+		else if ((i==7) && (board[1][2] == '_') && (*turn == 'o')) {
+				board[1][2] = 'o';
+				*turn = 'x';
+				}
+		else if ((i==8) && (board[2][1] == '_') && (*turn == 'o')) {
+				board[2][1] = 'o';
+				*turn = 'x';
+				}
+		else if ((i==9) && (board[2][2] == '_') && (*turn == 'o')) {
+				board[2][2] = 'o';
+				*turn = 'x';
+				}
+		else if ((i > 9) || (i <= 0))  {
+			int x,y;
+			for (x=0;x<3;x++) {
+				for (y=0;y<3;y++) {
+				if ((board[x][y] == '_') && (*turn == 'o')) {
+					board[x][y] = 'o';
+					*turn = 'x';
+					}
+					else {
+						*winner = 3;
+					}
+				}
+			}
+		}
+		else {
+			*winner = 3;
+		}
+	}
+
+int AIS(char board[3][3]) {
+	int i = 0;
+	int tmp;
 			if (((board[0][0] == 'x') && (board[1][1] == 'x') && (board[2][2] != 'o'))
 				|| ((board[2][0] == 'x') && (board[2][1] == 'x') && (board[2][2] != 'o'))) {
 				i = 9;
@@ -205,93 +260,30 @@ void AI(char board[3][3], char* turn, int* count, int* winner) {
 			else if (((board[0][0] == 'x') && (board[2][0] == 'x') && (board[1][0] != 'o'))
 				|| ((board[1][2] == 'x') && (board[1][1] == 'x') && (board[1][0] != 'o')))	{
 				i = 5;
-			} /*
-			else if ((board[2][0] == 'x') && (board[2][1] == 'x') && (board[2][2] != 'o')) {
-				i = 9;
 			}
-			else if ((board[2][2] == 'x') && (board[0][2] == 'x') && (board[1][2] != 'o')) {
-				i = 7;
+			else if (((board[1][1] == 'x') && (board[2][2] == 'x') && (board[0][0] != 'o'))
+				|| ((board[0][1] == 'x') && (board[0][2] == 'x') && (board[0][0] != 'o'))
+				|| ((board[1][0] == 'x') && (board[2][0] == 'x') && (board[0][0] != 'o'))) {
+				i = 1;
 			}
-			else if ((board[2][0] == 'x') && (board[2][2] == 'x') && (board[2][1] != 'o')) {
-				i = 8;
+			else {
+				tmp = rand();
+				srand( time(NULL));
+				i = ((rand() * tmp) % 9);
 			}
-			else if ((board[1][2] == 'x') && (board[1][1] == 'x') && (board[1][0] != 'o')) {
-				i = 5;
-			}
-			else if ((board[0][0] == 'x') && (board[0][2] == 'x') && (board[0][1] != 'o')) {
-				i = 6;
-			} */
-		if ((i==1) && (board[0][0] == '_') && (*turn == 'o')) {
-				board[0][0] = 'o';
-				*turn = 'x';
-				//return 0;
-				}
-		else if ((i==2) && (board[0][2] == '_') && (*turn == 'o')) {
-				board[0][2] = 'o';
-				*turn = 'x';
-				//return 0;
-				}
-		else if ((i==3) && (board[2][0] == '_') && (*turn == 'o')) {
-				board[2][0] = 'o';
-				*turn = 'x';
-				//return 0;
-				}
-		else if ((i==4) && (board[1][1] == '_') && (*turn == 'o')) {
-				board[1][1] = 'o';
-				*turn = 'x';
-				//return 0;
-				}
-		else if ((i==5) && (board[1][0] == '_') && (*turn == 'o')) {
-				board[1][0] = 'o';
-				*turn = 'x';
-				//return 0;				
-				}
-		else if ((i==6) && (board[0][1] == '_') && (*turn == 'o')) {
-				board[0][1] = 'o';
-				*turn = 'x';
-				//return 0;
-				}
-		else if ((i==7) && (board[1][2] == '_') && (*turn == 'o')) {
-				board[1][2] = 'o';
-				*turn = 'x';
-				//return 0;
-				}
-		else if ((i==8) && (board[2][1] == '_') && (*turn == 'o')) {
-				board[2][1] = 'o';
-				*turn = 'x';
-				//return 0;
-				}
-		else if ((i==9) && (board[2][2] == '_') && (*turn == 'o')) {
-				board[2][2] = 'o';
-				*turn = 'x';
-				//return 0;
-				}
-		else if (i > 9)  {
-			int x,y;
-			for (x=0;x<3;x++) {
-				for (y=0;y<3;y++) {
-				if (board[x][y] == '_') {
-					board[x][y] = 'o';
-					*turn = 'x';
-						}
-				else {
-					*winner = 3;
-					printf("%d", i);
-				}
-					}
-				}
-		}
-	} 
-	}
-	++o;
+			printf("%d", i );
+			return i;
 }
 
-int CheckLegal(int x, int y) {
+int CheckLegal(int x, int y, char board[3][3]) {
 	if ((x == 0) || (x == 1) || (x == 2) || (x == '\n') || (x == '_') || (x == 'x') || (x  == 'o') || (x == '|') || (x == 'E') || (x == 'r')) {
 		x = 1;
 	}
 	if ((y == 0) || (y == 1) || (y == 2) || (y == '\n') || (y == '_') || (y == 'x') || (y  == 'o') || (y == '|') || (y == 'E') || (y == 'r')) {
 		y = 1;
+	}
+	if ((board[x][y] != 'x') && (board[x][y] != 'o')) {
+		x = 1;
 	}
 	if ((x == 1) && (y == 1)) {
 		return 1;
@@ -302,5 +294,5 @@ int CheckLegal(int x, int y) {
 }
 
 void AboutPage() {
-	printf("I'm tinkeirng, ignore me.");
+	printf("Instructions:\nUse 0-2,0-2 for coordinates.\nWritten by Nic Losby.\nDoes anyone actually read the about page?");
 }
