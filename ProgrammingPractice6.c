@@ -1,3 +1,17 @@
+/*         Nicholas Losby
+        nlosby@iastate.edu
+        CPRE 185 Section B
+        Programming Practice 6
+        <Reflection 1 What were you trying to learn or achieve?>
+        Providing enough iterations of the possibilities in tic-tac-to to make a series of conditionals that act like a human when playing the game, including making mistakes. 
+        <Reflection 2 Were you successful? Why or Why not?>
+        Yes however sometimes the computer plays in the same spot twice and I'm not quite sure how to fix that.
+	<Reflection 3 Would you do anything differently if starting this program over?  If so, explain what.>
+	Maybe have the comouter read and record past moves from the player to try and determine its strategy.
+	<Reflection 4 Think about the most important thing you learned when writing this piece of code.  What was it and explain why it was significant.>
+	Testing my code can be the longest part of programming and sometimes the most fun too.
+*/
+
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
